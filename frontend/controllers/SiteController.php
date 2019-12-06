@@ -1,16 +1,23 @@
 <?php
+
 namespace frontend\controllers;
 
+use common\models\Category;
+use common\models\Product;
+use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
 //use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 
-/**
- * Site controller
- */
 class SiteController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            AccessBehavior::className(),
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -31,29 +38,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(['user/login']);
-        }
-
-//        if (!Yii::$app->user->can('viewInfo')) {
-//            return $this->redirect(['user/login']);
-//        }
-
+        $categories = Category::getCategoriesList();
+        $products = Product::find()->all();
         $user = Yii::$app->user->identity;
-//
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => $user->getTransactions(),
-//            'pagination' => [
-//                'pageSize' => 3,
-//            ],
-//        ]);
-        if (!\Yii::$app->user->can('admin')) {
-            throw new ForbiddenHttpException('Access denied');
-        }
+
         return $this->render('index', [
             'user' => $user,
-            //'dataProvider' => $dataProvider
+            'categories' => $categories,
+            'products' => $products,
         ]);
     }
 }

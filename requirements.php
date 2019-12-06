@@ -42,7 +42,7 @@ if (!isset($frameworkPath) || !is_dir($frameworkPath)) {
 require_once $frameworkPath . '/requirements/YiiRequirementChecker.php';
 $requirementsChecker = new YiiRequirementChecker();
 
-$gdMemo = $imagickMemo = 'Either GD PHP extension with FreeType support or ImageMagick PHP extension with PNG support is required for image CAPTCHA.';
+$gdMemo = $imagickMemo = 'Either GD PHP extension with FreeType support or ImageMagick PHP extension with PNG support is required for upload CAPTCHA.';
 $gdOK = $imagickOK = false;
 
 if (extension_loaded('imagick')) {
@@ -51,7 +51,7 @@ if (extension_loaded('imagick')) {
     if (in_array('PNG', $imagickFormats)) {
         $imagickOK = true;
     } else {
-        $imagickMemo = 'Imagick extension should be installed with PNG support in order to be used for image CAPTCHA.';
+        $imagickMemo = 'Imagick extension should be installed with PNG support in order to be used for upload CAPTCHA.';
     }
 }
 
@@ -60,7 +60,7 @@ if (extension_loaded('gd')) {
     if (!empty($gdInfo['FreeType Support'])) {
         $gdOK = true;
     } else {
-        $gdMemo = 'GD extension should be installed with FreeType support in order to be used for image CAPTCHA.';
+        $gdMemo = 'GD extension should be installed with FreeType support in order to be used for upload CAPTCHA.';
     }
 }
 

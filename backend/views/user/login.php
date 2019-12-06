@@ -6,7 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Вход';
+$this->title = 'Вход в админку';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">

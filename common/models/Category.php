@@ -57,4 +57,13 @@ class Category extends \yii\db\ActiveRecord
     {
         return arrayHelper::map(self::Find()->All(), 'id', 'title');
     }
+
+    /**
+     * Возвращает массив категорий для списка на сайте
+     * @return array <p>Массив с категориями</p>
+     */
+    public static function  getCategoriesList()
+    {
+        return Category::Find()->orderBy('id')->asArray()->all();
+    }
 }

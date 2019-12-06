@@ -26,11 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?php
+    $gallery = $model->getImages();
+    $img_str = '';
+    foreach ($gallery as $image) {
+        $img_str .= '<a class="fancybox img-thumbnail" rel="gallery1" href="' . $image->getUrl() . '">' . Html::img($image->getUrl('84x85'), ['alt' => '']) . '</a>';
+    } ?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'category_id',
+            [
+                'attribute' => 'image',
+                'value' => $img_str,
+                'format' => "html",
+            ],
             'name',
             'cost',
             'description',

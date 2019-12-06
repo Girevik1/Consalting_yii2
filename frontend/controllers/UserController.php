@@ -8,6 +8,9 @@ use frontend\models\forms\SignupForm;
 
 class UserController extends \yii\web\Controller
 {
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionLogin()
     {
         $model = new LoginForm();
@@ -22,6 +25,10 @@ class UserController extends \yii\web\Controller
         ]);
     }
 
+    /**
+     * @return string|\yii\web\Response
+     * @throws \yii\base\Exception
+     */
     public function actionSignup()
     {
         $model = new SignupForm();

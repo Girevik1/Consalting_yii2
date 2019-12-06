@@ -2,8 +2,10 @@
 
 namespace backend\controllers;
 
+use common\models\User;
+use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
-//use yii\data\ActiveDataProvider;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 /**
@@ -11,6 +13,12 @@ use yii\web\Controller;
  */
 class SiteController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            AccessBehavior::className(),
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -31,27 +39,18 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(['user/login']);
-        }
-
-//        if (!Yii::$app->user->can('viewInfo')) {
-//            return $this->redirect(['user/login']);
-//        }
-
         $user = Yii::$app->user->identity;
-//
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => $user->getTransactions(),
-//            'pagination' => [
-//                'pageSize' => 3,
-//            ],
-//        ]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => User::find(),
+            'pagination' => [
+                'pageSize' => 4,
+            ],
+        ]);
 
         return $this->render('index', [
             'user' => $user,
-            //'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider
         ]);
     }
 }

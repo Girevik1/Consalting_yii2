@@ -1,6 +1,6 @@
 <?php
-/* @var $this yii\web\View */
 
+/* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 
 use yii\helpers\Html;
@@ -23,8 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'password')->passwordInput() ?>
 
             <div class="form-group">
-                    <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
+                <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::a('Зарегистрироваться', ['user/signup'], ['class' => 'btn btn-success']) ?>
+            </div>
 
             <?php ActiveForm::end(); ?>
         </div>

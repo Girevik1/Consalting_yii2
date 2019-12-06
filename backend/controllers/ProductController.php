@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
 use common\models\Product;
 use backend\models\search\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProductController implements the CRUD actions for product model.
@@ -26,6 +28,7 @@ class ProductController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            AccessBehavior::className(),
         ];
     }
 
@@ -37,10 +40,12 @@ class ProductController extends Controller
     {
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = Product::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 
@@ -67,6 +72,17 @@ class ProductController extends Controller
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->image = UploadedFile::getInstance($model, 'image');
+
+            if ($model->image) {
+                $model->upload();
+            }
+
+            unset($model->image);
+            $model->gallery = UploadedFile::getInstances($model, 'gallery');
+            $model->uploadGallery();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -87,12 +103,24 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+            $model->image = UploadedFile::getInstance($model, 'image');
+
+            if ($model->image) {
+                $model->upload();
+            }
+
+            unset($model->image);
+            $model->gallery = UploadedFile::getInstances($model, 'gallery');
+            $model->uploadGallery();
+
+            Yii::$app->session->setFlash('success', 'Данные успешно обновлены!');
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

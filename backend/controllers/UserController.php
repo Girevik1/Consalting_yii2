@@ -11,13 +11,9 @@ class UserController extends \yii\web\Controller
     {
         $model = new LoginForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if (Yii::$app->user->can('viewAdminPage')) {
-                Yii::$app->session->setFlash('success', 'Здраствуйте, админ ' . Yii::$app->user->identity->username . '!');
-                return $this->redirect(['site/index']);
-            }
-            Yii::$app->session->setFlash('danger', 'К сожалению у Вас нет доступа');
-            return $this->redirect(['user/login']);
+        if ($model->load(Yii::$app->request->post()) && $model->login() && Yii::$app->user->can('manager')) {
+            Yii::$app->session->setFlash('success', 'Здраствуйте, ' . Yii::$app->user->identity->username . '!');
+            return $this->redirect(['site/index']);
         }
 
         return $this->render('login', [

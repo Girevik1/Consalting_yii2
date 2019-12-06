@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
 use common\models\Category;
 use backend\models\search\CategorySearch;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +28,7 @@ class CategoryController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            AccessBehavior::className(),
         ];
     }
 
@@ -101,6 +104,8 @@ class CategoryController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws StaleObjectException
      */
     public function actionDelete($id)
     {

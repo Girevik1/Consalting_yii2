@@ -15,4 +15,5 @@ return [
             'class' => 'yii\rbac\DbManager',
         ],
     ],
+
 ];

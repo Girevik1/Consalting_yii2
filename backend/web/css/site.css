@@ -1,121 +1,77 @@
-html,
-body {
-    height: 100%;
+.avatar-profile {
+    margin: 10px 0;
+    width: 200px;
 }
 
-.wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+.disabled {
+    display: none;
 }
 
-.wrap > .container {
-    padding: 70px 15px 20px;
+.form-button {
+    margin-top: 10px;
 }
 
-.footer {
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
+.form-create {
+    margin-bottom: 35px;
 }
 
-.jumbotron {
+.messages-index {
+    height: 600px;
+    overflow: scroll;
+    border: 1px solid #c7c7c7;
+}
+
+.messages-index .message {
+    width: 50%;
+    background: #e5e5e6;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.messages-index ._me {
+    display: flex;
+    justify-content: flex-end;
+}
+.messages-index ._me .message {
+    width: 50%;
+    background: #b6b6ff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.messages-index .message {
+    width: 50%;
+    background: #e5e5e6;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.messages-index .file {
+    margin-bottom: 10px;
+}
+
+.attached-files {
+    width: 200px;
+    border: 1px solid;
     text-align: center;
-    background-color: transparent;
+    padding: 10px;
+    margin-right: 5px;
 }
 
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
 
-.not-set {
-    color: #c55;
-    font-style: italic;
-}
-
-/* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    padding-left: 5px;
-}
-
-a.asc:after {
-    content: /*"\e113"*/ "\e151";
-}
-
-a.desc:after {
-    content: /*"\e114"*/ "\e152";
-}
-
-.sort-numerical a.asc:after {
-    content: "\e153";
-}
-
-.sort-numerical a.desc:after {
-    content: "\e154";
-}
-
-.sort-ordinal a.asc:after {
-    content: "\e155";
-}
-
-.sort-ordinal a.desc:after {
-    content: "\e156";
-}
-
-.grid-view th,
-.grid-view td:last-child {
-    white-space: nowrap;
-}
-
-.grid-view .filters input,
-.grid-view .filters select {
-    min-width: 50px;
-}
-
-.hint-block {
-    display: block;
-    margin-top: 5px;
-    color: #999;
-}
-
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
-}
-
-/* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding: 15px;
-    border: none;
-}
-
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 15px;
-    }
-}
-
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
-    text-decoration: none;
-}
-
-.nav > li > form > button.logout:focus {
-    outline: none;
+.error {
+    color: red;
 }
